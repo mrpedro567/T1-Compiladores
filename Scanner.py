@@ -11,9 +11,9 @@ def scanner(file):
     letters = list('ABCDEFGHIJKLMNOPKRSTUVWXYZabcdefghijklmnopqrstuvwxyz')
     digits = list('0123456789')
     state = 0
-    
     word = []
     i = 1
+    
     while(i == 1): 
         match(state):
             case(0):
@@ -22,21 +22,54 @@ def scanner(file):
                 if(char in letters):
                     state = 6 
                     word.append(char)
-                    nextChar(file)
 
                 if(char in digits):
                     state = 1
                     word.append(char)
-                    nextChar(file)
 
                 match(char):
-                    case("'"):
+                    case('"'):
                         state = 4  
-                        nextChar(file)
+                        word.append(char)
+                    case('{'):
+                        state = 7
+                        word.append(char)
+                    case('<'): 
+                        state = 9
+                        word.append(char)
+                    case('>'):
+                        state = 13
+                        word.append(char)
+                    case('='):
+                        state = 15
+                        word.append(char)
+                    case('+'):
+                        state = 16
+                        word.append(char)
+                    case('-'):
+                        state = 16
+                        word.append(char)
+                    case('*'):
+                        state = 16
+                        word.append(char)
+                    case('/'):
+                        state = 16
+                        word.append(char)
+                    case('('):
+                        state = 18
+                        word.append(char)
+                    case(')'):
+                        state = 17
+                        word.append(char)
+                    case(';'):
+                        state = 19
+                        word.append(char)
+                    case(','):
+                        state = 20
+                        word.append(char)
                     case(' '):
                         state = 21
                         word.append(char)
-
                     case('\t'):
                         state = 22
                         word.append(char)
@@ -104,151 +137,3 @@ def scanner(file):
                 return [word, state]
             case _:
                 return [word, state]
-                
-    if (char in digits):
-        state = 1
-        word.append(char)
-        c = c +1
-        if (file[l][c] in digits):
-            state = 2
-            word.append(file[l][c])
-            c = c + 1
-            while (file[l][c] in digits):
-                word.append(file[l][c])
-                c = c + 1
-            if (file[l][c] == '.'):
-                word.append(file[l][c])
-                c = c + 1
-                if (file[l][c] in digits):
-                    state = 25
-                    word.append(file[l][c])
-                    c = c + 1
-                    while (file[l][c] in digits):
-                        word.append(file[l][c])
-                        c = c + 1
-                    if(file[l][c] == 'E' or file[l][c] == 'e'):
-                        word.append(file[l][c])
-                        c = c + 1
-                        if (file[l][c] in digits):
-                            state = 26  
-                            word.append(file[l][c])
-                        elif (file[l][c] == '+' or file[l][c] == '-'):
-                            word.append(file[l][c])
-                            c = c + 1
-                            if (file[l][c] in digits):
-                                state = 26
-                                word.append(file[l][c])
-        elif (file[l][c] == '.'):
-            word.append(file[l][c])
-            c = c + 1
-            if (file[l][c] in digits):
-                state = 25
-                word.append(file[l][c])
-                c = c + 1
-                while (file[l][c] in digits):
-                    word.append(file[l][c])
-                    c = c + 1
-                if(file[l][c] == 'E' or file[l][c] == 'e'):
-                    word.append(file[l][c])
-                    c = c + 1
-                    if (file[l][c] in digits):
-                        state = 26  
-                        word.append(file[l][c])
-                    elif (file[l][c] == '+' or file[l][c] == '-'):
-                        word.append(file[l][c])
-                        c = c + 1
-                        if (file[l][c] in digits):
-                            state = 26
-                            word.append(file[l][c])
-        elif (file[l][c] == 'E' or file[l][c] == 'e'):
-            word.append(file[l][c])
-            c = c + 1
-            if (file[l][c] in digits):
-                state = 26  
-                word.append(file[l][c])
-            elif (file[l][c] == '+' or file[l][c] == '-'):
-                word.append(file[l][c])
-                c = c + 1
-                if (file[l][c] in digits):
-                    state = 26
-                    word.append(file[l][c])
-    elif (char in letters):
-        state = 6 
-        word.append(char)
-        while (file[l][c] in letters):
-            c = c + 1
-            word.append(file[l][c])
-    elif (char == '+' or char == '-' or char == '*' or char == '/'):
-        state = 16
-        word.append(file[l][c])
-    elif (char == ')'):
-        state = 17
-        word.append(file[l][c])
-    elif (char == '('):
-        state = 18
-        word.append(file[l][c])
-    elif (char == ';'):
-        state = 19
-        word.append(file[l][c])
-    elif (char == ','):
-        state = 20
-        word.append(file[l][c])
-    elif (char == ' '):
-        state = 21
-        word.append(file[l][c])
-    elif (char == '\t'):
-        state = 22
-        word.append(file[l][c])
-    elif (char == '\n'):
-        state = 23
-        word.append(file[l][c])
-    elif (char == ')'):
-        state = 17
-        word.append(file[l][c])
-    elif (char == '='):
-        state = 15
-        word.append(file[l][c])
-    elif (char == '>'):
-        state = 13
-        word.append(file[l][c])
-        c = c + 1
-        if (file[l][c] == '='):
-            state = 14
-            word.append(file[l][c])
-    elif (char == '<'):
-        state = 9
-        word.append(file[l][c])
-        c = c + 1
-        if (file[l][c] == '='):
-            state = 10
-            word.append(file[l][c])
-        elif (file[l][c] == '>'):
-            state = 12
-            word.append(file[l][c])
-        elif (file[l][c] == '-'):
-            state = 11
-            word.append(file[l][c])
-    elif (char == '{'):
-        word.append(file[l][c])
-        c = c + 1
-        while (file[l][c] != '}'):
-            word.append(file[l][c])
-            c = c + 1
-        if (file[l][c] == '}'):
-            state = 8
-            word.append(file[l][c])
-    elif (char == '"'):
-        word.append(file[l][c])
-        c = c + 1
-        while (file[l][c] != '"'):
-            word.append(file[l][c])
-            c = c + 1
-        if (file[l][c] == '"'):
-            state = 5
-            word.append(file[l][c])
-        
-    return [word, state]
-                
-                
-    
-    
