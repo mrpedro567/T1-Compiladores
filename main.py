@@ -1,6 +1,7 @@
 import argparse
 import sys
 import time
+import variables as var
 from symbolTable import SymbolTable
 from token import Token
 
@@ -15,19 +16,16 @@ def main():
     symbolTable = SymbolTable()
     initPalavras(symbolTable)
 
-    line = 0
-    column = 0
+    var.init()    
 
     file = open(sys.argv[1], "r")
     lines = file.readlines()
 
     while(True): 
-        print(lines[line][column])
-        column += 1
-        if(column == len(lines[line])):
-            column = 0
-            line += 1
-        time.sleep(1)
+        print(lines)
+        print("Linha: " + str(var.getLine()) + " Coluna: " + str(var.getColumn()))
+        var.setColumn(var.getColumn() + 1)
+        
 
 
 def initPalavras(symbolTable):
