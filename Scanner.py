@@ -1,4 +1,5 @@
 import variables as var
+from tokenClass import Token
 
 def nextChar(file): 
     if(var.getColumn() == len(file[var.getLine()])):
@@ -13,7 +14,7 @@ def scanner(file):
     state = 0
     word = []
     i = 1
-    
+
     while(i == 1): 
         match(state):
             case(0):
@@ -22,10 +23,12 @@ def scanner(file):
                 if(char in letters):
                     state = 6 
                     word.append(char)
+                    continue
 
                 if(char in digits):
                     state = 1
                     word.append(char)
+                    continue
 
                 match(char):
                     case('"'):
@@ -90,7 +93,18 @@ def scanner(file):
             case(3):
                 return [word, state]
             case(4):
-                return [word, state]
+                nextChar(file)
+                char = file[var.getLine()][var.getColumn()]
+
+                match(char):
+                    case('"'):
+                        state = 5
+                        word.append(char)
+                    case('$'):
+                        print('Erro: Esperado caráctere: ". Linha: ' + var.getLine() + ' Coluna: ' + var.getColumn())
+                    case(_):
+                        state = 4
+                        word.append(char)
             case(5):
                 return [word, state]
             case(6):
@@ -114,7 +128,9 @@ def scanner(file):
             case(15):
                 return [word, state]
             case(16):
-                return [word, state]
+                nextChar(file)
+                state = 0
+                return Token("OPM", word, None)
             case(17):
                 return [word, state]
             case(18):

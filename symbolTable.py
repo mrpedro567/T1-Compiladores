@@ -1,4 +1,4 @@
-from token import Token
+from tokenClass import Token
 
 
 class SymbolTable:

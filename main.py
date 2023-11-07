@@ -3,7 +3,7 @@ import sys
 import time
 import variables as var
 from symbolTable import SymbolTable
-from token import Token
+from tokenClass import Token
 
 global line
 global column
