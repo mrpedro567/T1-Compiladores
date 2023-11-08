@@ -4,6 +4,7 @@ import time
 import variables as var
 from symbolTable import SymbolTable
 from tokenClass import Token
+from Scanner import scanner
 
 global line
 global column
@@ -22,11 +23,12 @@ def main():
     lines = file.readlines()
 
     while(True): 
-        print(lines)
-        print("Linha: " + str(var.getLine()) + " Coluna: " + str(var.getColumn()))
-        var.setColumn(var.getColumn() + 1)
-        
+        token = scanner(lines, symbolTable)
 
+        if(token.classe != "ERRO"): 
+            print("Classe: " + str(token.classe) + ", Lexema: " + str(token.lexema) + " , Tipo: " + str(token.tipo))
+        if(token.classe == "EOF"): 
+            break
 
 def initPalavras(symbolTable):
     symbolTable.insert("inicio", Token("inicio", "inicio", "inicio"))

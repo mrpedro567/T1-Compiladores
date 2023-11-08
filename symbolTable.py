@@ -9,4 +9,7 @@ class SymbolTable:
         self.table[key] = value
 
     def get(self, key):
-        return self.table.get(key, None)
+        if key in self.table:
+            return self.table[key]
+        else:
+            return None
