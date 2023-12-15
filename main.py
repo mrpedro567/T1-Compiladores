@@ -1,10 +1,10 @@
 import argparse
 import sys
 import time
-import variables as var
-from symbolTable import SymbolTable
-from tokenClass import Token
-from Scanner import scanner
+import scanner.variables as var
+from scanner.symbolTable import SymbolTable
+from scanner.tokenClass import Token
+from scanner.Scanner import scanner
 
 global line
 global column
