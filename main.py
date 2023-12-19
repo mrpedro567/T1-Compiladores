@@ -2,9 +2,12 @@ import argparse
 import sys
 import time
 import scanner.variables as var
+import parser.productions as prod
 from scanner.symbolTable import SymbolTable
 from scanner.tokenClass import Token
 from scanner.Scanner import scanner
+from parser.parser import parse
+
 
 global line
 global column
@@ -17,18 +20,13 @@ def main():
     symbolTable = SymbolTable()
     initPalavras(symbolTable)
 
-    var.init()    
+    var.init()   
+    prod.init()
 
     file = open(sys.argv[1], "r")
     lines = file.readlines()
 
-    while(True): 
-        token = scanner(lines, symbolTable)
-
-        if(token.classe != "ERRO"): 
-            print("Classe: " + str(token.classe) + ", Lexema: " + str(token.lexema) + " , Tipo: " + str(token.tipo))
-        if(token.classe == "EOF"): 
-            break
+    parse(lines, symbolTable)
 
 def initPalavras(symbolTable):
     symbolTable.insert("inicio", Token("inicio", "inicio", "inicio"))
@@ -44,7 +42,7 @@ def initPalavras(symbolTable):
     symbolTable.insert("fim", Token("fim", "fim", "fim"))
     symbolTable.insert("inteiro", Token("inteiro", "inteiro", "inteiro"))
     symbolTable.insert("literal", Token("literal", "literal", "literal"))
-    symbolTable.insert("literal", Token("literal", "literal", "literal"))
+    symbolTable.insert("real", Token("real", "real", "real"))
 
     
 

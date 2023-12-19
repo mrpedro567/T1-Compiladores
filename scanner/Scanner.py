@@ -1,6 +1,6 @@
-import variables as var
-from tokenClass import Token
-from symbolTable import SymbolTable
+import scanner.variables as var
+from scanner.tokenClass import Token
+from scanner.symbolTable import SymbolTable
 
 def nextChar(file): 
     if(var.column >= len(file[var.line]) - 1):
@@ -11,6 +11,8 @@ def nextChar(file):
 
 def isEOF(file):
     if(var.line >= (len(file) ) ):
+        return True
+    elif(var.line == (len(file) - 1) and var.column >= len(file[var.line])):
         return True
     else:
         return False
@@ -98,7 +100,7 @@ def scanner(file, table) -> Token:
             case(1):
                 nextChar(file)
                 if(isEOF(file)):
-                    return Token("Num", word, "inteiro")
+                    return Token("num", word, "inteiro")
                 
                 char = file[var.line][var.column]
                 if(char in digits):
@@ -115,12 +117,12 @@ def scanner(file, table) -> Token:
                         state = 3
                         word += char
                 else:
-                    return Token("Num", word, "inteiro")
+                    return Token("num", word, "inteiro")
             case(2):
                 nextChar(file)
 
                 if(isEOF(file)):
-                    return Token("Num", word, "inteiro")
+                    return Token("num", word, "inteiro")
                 
                 char = file[var.line][var.column]
                 if(char in digits):
@@ -130,7 +132,7 @@ def scanner(file, table) -> Token:
                     state = 3
                     word += char
                 else:
-                    return Token("Num", word, "inteiro")
+                    return Token("num", word, "inteiro")
             case(3):
                 nextChar(file)
                 if(isEOF(file)):
@@ -165,7 +167,7 @@ def scanner(file, table) -> Token:
                         word += char
             case(5):
                 nextChar(file)
-                return Token("Lit", word, "literal")
+                return Token("lit", word, "literal")
                 
             case(6):
                 nextChar(file)
@@ -228,7 +230,7 @@ def scanner(file, table) -> Token:
                 nextChar(file)
 
                 if(isEOF(file)):
-                    return Token("OPR", word, None)
+                    return Token("opr", word, None)
 
                 char = file[var.line][var.column]
                 match(char):
@@ -242,51 +244,56 @@ def scanner(file, table) -> Token:
                         state = 12
                         word += char
                     case(_):
-                        return Token("OPR", word, None)
+                        return Token("opr", word, None)
             case(10):
                 nextChar(file)
-                return Token("OPR", word, None)
+                return Token("opr", word, None)
             case(11):
                 nextChar(file)
-                return Token("RCB", word, None)
+                return Token("rcb", word, None)
             case(12):
                 nextChar(file)
-                return Token("OPR", word, None)
+                return Token("opr", word, None)
             case(13):
                 nextChar(file)
 
                 if(isEOF(file)):
-                    return Token("OPR", word, None)
+                    return Token("opr", word, None)
 
                 char = file[var.line][var.column]
-                
-                if(char == "="):
-                    state = 14
-                    word += char
-                else:
-                    nextChar(file)
-                    return Token("OPR", word, None)
+                match(char):
+                    case("="):
+                        state = 10
+                        word += char
+                    case("-"):
+                        state = 11
+                        word += char
+                    case(">"):
+                        state = 12
+                        word += char
+                    case(_):
+                        return Token("opr", word, None)
             case(14):
                 nextChar(file)
-                return Token("OPR", word, None)
+                return Token("opr", word, None)
             case(15):
                 nextChar(file)
-                return Token("OPR", word, None)
+                return Token("opr", word, None)
             case(16):
                 nextChar(file)
-                return Token("OPM", word, None)
+                return Token("opm", word, None)
             case(17):
                 nextChar(file)
-                return Token("FC_P", word, None)
+                return Token("fc_p", word, None)
             case(18):
                 nextChar(file)
-                return Token("AB_P", word, None)
+                return Token("ab_p", word, None)
             case(19):
                 nextChar(file)
-                return Token("PT_V", word, None)
+                return Token("pt_v", word, None)
             case(20):
                 nextChar(file)
-                return Token("VIR", word, None)
+                return Token("vir", word, None)
             case(21):
                 nextChar(file)
                 state = 0
@@ -303,12 +310,12 @@ def scanner(file, table) -> Token:
                 nextChar(file)
                    
             case(24):
-               return Token("EOF", "EOF", None)
+               return Token("eof", "EOF", None)
             case(25):
                 nextChar(file)
 
                 if(isEOF(file)):
-                    return Token("Num", word, "real")
+                    return Token("num", word, "real")
 
                 char = file[var.line][var.column]
                 
@@ -323,7 +330,7 @@ def scanner(file, table) -> Token:
                     word += char
                 else:
                     state = 0
-                    return Token("Num", word, "real")
+                    return Token("num", word, "real")
             case(26):
                 nextChar(file)
 
@@ -361,7 +368,7 @@ def scanner(file, table) -> Token:
                 nextChar(file)
 
                 if(isEOF(file)):
-                    return Token("Num", word, "real")
+                    return Token("num", word, "real")
 
                 char = file[var.line][var.column]
 
@@ -370,7 +377,7 @@ def scanner(file, table) -> Token:
                     word += char
                 else:
                     state = 0
-                    return Token("Num", word, "real")
+                    return Token("num", word, "real")
             case _:
                 print("Erro: caractere invalido. Linha: " + str(var.line) + " Coluna: " + str(var.column))
                 return Token("ERRO", None, None)
