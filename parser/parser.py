@@ -17,6 +17,11 @@ def parse(lines, symbolTable):
         state = stack[-1]
         action = actionTable.iloc[state][token.getClasse()]
         
+        if(isinstance(action, str) == False):
+            print("Erro sintático na linha " + str(var.line) + " e coluna " + str(var.column), "Posição invalida para:", token.getLexema())
+            token = scanner(lines, symbolTable)
+            continue
+
         if action[0] == 's':
             stack.append(int(action[1:]))
             token = scanner(lines, symbolTable)
@@ -35,8 +40,5 @@ def parse(lines, symbolTable):
         elif action == 'acc':
             break
         else:
-            print('Erro de sintaxe')
-            break
-
-
-            
+            # erro 
+            print("Erro sintático na linha " + str(var.line) + " e coluna " + str(var.column))
