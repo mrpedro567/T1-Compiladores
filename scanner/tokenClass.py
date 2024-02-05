@@ -18,4 +18,12 @@ class Token:
     
     def getTipo(self):
         return self.tipo
+       
+    def setClasse(self, classe):
+        self.classe = classe
     
+    def setLexema(self, lexema):
+        self.lexema = lexema
+    
+    def setTipo(self, tipo):
+        self.tipo = tipo
