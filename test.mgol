@@ -1,22 +1,14 @@
 inicio
 varinicio
-literal A,B;
-inteiro B;
-inteiro D;
-real C$ ;
+literal A;
+inteiro B,D;
+real C ;
 varfim;
-escreva "Digite B:";
+escreva "Digite B";
 leia B;
 escreva "Digite A:";
 leia A;
 se(B>2)
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt lectus in malesuada convallis. Duis ultrices, arcu vel finibus ultrices, arcu dolor suscipit ligula, sit amet consequat ipsum dui et mauris. Proin eget volutpat nunc, in euismod risus. Proin at vulputate mi. Integer nec libero accumsan, luctus justo vitae, porta ligula. Aenean et metus non enim facilisis ullamcorper facilisis sit amet arcu. Aenean eget libero efficitur lectus accumsan eleifend. Vivamus vel neque purus. Fusce convallis ac orci non ultricies. Morbi efficitur nulla ut lectus laoreet imperdiet. Duis ut tellus eleifend, iaculis urna ut, tincidunt purus. Sed posuere placerat nulla eget finibus. Suspendisse hendrerit massa nec nulla ullamcorper pretium. Maecenas ultrices lectus sed ipsum placerat aliquam. Pellentesque et finibus nunc.
-
-Donec magna mauris, rhoncus non luctus sed, vehicula ac nibh. Nam venenatis ligula et eleifend malesuada. Nulla non convallis lacus, eget aliquam ex. Integer ullamcorper dui sed odio varius, et dapibus ipsum vulputate. Nunc pretium maximus aliquet. Phasellus semper, ante sed sodales ultricies, nunc lectus ultricies erat, ac pulvinar tortor dui vitae neque. Nam et elementum sapien. Integer non lobortis erat. Aenean euismod aliquam iaculis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur venenatis quis purus quis aliquam. Proin dignissim viverra velit. Praesent quis dolor orci. Fusce ut egestas eros.}
-
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt lectus in malesuada convallis. Duis ultrices, arcu vel finibus ultrices, arcu dolor suscipit ligula, sit amet consequat ipsum dui et mauris. Proin eget volutpat nunc, in euismod risus. Proin at vulputate mi. Integer nec libero accumsan, luctus justo vitae, porta ligula. Aenean et metus non enim facilisis ullamcorper facilisis sit amet arcu. Aenean eget libero efficitur lectus accumsan eleifend. Vivamus vel neque purus. Fusce convallis ac orci non ultricies. Morbi efficitur nulla ut lectus laoreet imperdiet. Duis ut tellus eleifend, iaculis urna ut, tincidunt purus. Sed posuere placerat nulla eget finibus. Suspendisse hendrerit massa nec nulla ullamcorper pretium. Maecenas ultrices lectus sed ipsum placerat aliquam. Pellentesque et finibus nunc.
-
-Donec magna mauris, rhoncus non luctus sed, vehicula ac nibh. Nam venenatis ligula et eleifend malesuada. Nulla non convallis lacus, eget aliquam ex. Integer ullamcorper dui sed odio varius, et dapibus ipsum vulputate. Nunc pretium maximus aliquet. Phasellus semper, ante sed sodales ultricies, nunc lectus ultricies erat, ac pulvinar tortor dui vitae neque. Nam et elementum sapien. Integer non lobortis erat. Aenean euismod aliquam iaculis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur venenatis quis purus quis aliquam. Proin dignissim viverra velit. Praesent quis dolor orci. Fusce ut egestas eros."
 entao
 se(B<=4)
 entao
@@ -28,12 +20,7 @@ B<-B+2;
 B<-B+3;
 D<-B;
 C<-5.0;
- repita (B<5)
- C<-B+2;
- escreva C;
- B<-B+1;
- fimrepita
-escreva "\nB=\n";
+ escreva "\nB=\n";
 escreva D;
 escreva "\n";
 escreva C;
